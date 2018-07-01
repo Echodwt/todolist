@@ -1,0 +1,427 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>To - DoList</title>
+<script src="js/jquery/2.0.0/jquery.min.js"></script>
+<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap/3.3.6/font-awesome.css" rel="stylesheet">
+
+<script src="js/bootstrap/3.3.6/bootstrap.min.js"></script>
+<script src="js/jquery/2.0.0/jquery.min.js"></script>
+<style type="text/css">
+	#header{width:1000px;background-color:#CCE0E0;
+	}
+	#search{float:right;}
+	#body{width:1000px;height:500px;}
+	#body ul{list-style-type: none;}
+	#menu{float:left;}
+	#body-right{float:right;width:700px;}
+	#d1{background-color:#57D3DD;position:relative;height:80px;}
+	#d1 h1{font-size:2.5em;font-weight:600;color:white;}
+	.create1{height:250px;width:700px;}
+	#body-right{width:700px;height:500px;float:left;}
+	*{
+		font-family: 微软雅黑;
+		font-size: 15px;
+		color: #E74C29;
+	}
+	#spring{background-image:url(images/500462028.jpg);
+			background-repeat: no-repeat;}
+	#summer{
+		background-image: url(images/beijing.jpg);background-repeat: no-repeat;
+	}
+	#autumn{
+		background-image: url(images/500462028.jpg);background-repeat: no-repeat;
+	}
+	#winter{
+		background-image: url(images/beijing.jpg);background-repeat: no-repeat;
+	}
+	.checkbox{
+		background-color: e-xpression(this.checked?'yellow':'buttonface');
+	}
+	.del{
+		text-decoration: line-through;
+		color: #767171;
+	}
+</style>
+<script type="text/javascript">
+	/*侧边导航清单与其内容的显现*/
+	$('#myTabs a').click(function (e) {
+  		e.preventDefault()
+  		$(this).tab('show')
+	})
+	
+	/*search功能*/
+		/*var  thebody=document.getElementsByTagName('body');
+		function changeSpring(){
+			thebody[0].id='spring';
+		}
+		function changeSummer(){
+			thebody[0].id='summer'
+		}
+		function changeAutumn(){
+			thebody[0].id='autumn';
+		}
+		function changeWinter(){
+			thebody[0].id='winter';
+		}
+		changeSummer();
+		
+*/
+	 /*function getCheckedIds() {
+            var checkedSubject = $('#shows input[name=checkIds]:checkbox:checked');
+            checkedSubject.each(function() {
+                    $(this).parents("tr").hide();
+            });
+        }*/
+
+</script>
+</head>
+
+<body style="background-image:url(images/500462028.jpg)">
+<div id="app">
+	<div id="container">
+		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				 <li class="active"><a href="#我的 一天">我的一天</a></li>
+				 <li><a href="#我的代办">To - Do</a></li>
+				 <li><a href="#清单">清单</li>
+			  </ul>
+			  <form class="navbar-form navbar-left">
+				<div class="form-group" style="float: left"> 
+				  <input type="text" class="form-control" placeholder="Search">
+				</div>
+				<div style="float:right"> <button type="submit" class="btn btn-default">Submit</button></div>
+
+			  </form>
+			  <ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										Admin_one<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="login2.html">登录</a></li>
+										<li><a href="#">切换账号</a></li>
+										<li><a href="login2.html">注销</a></li>
+									</ul>
+								</li>
+						</ul>
+    </div>
+		<div style="float: left;width:30%">
+					<div style="float: left;width: 100%">
+				<div  id="menu">
+   					
+    				<ul  class="nav nav-stacked" role="tablist">
+       					<li  role="presentation" class="active">
+       						<a href="#today"  aria-controls="today" role="tab" data-toggle="tab">
+          						<span class="glyphicon glyphicon-asterisk"> 我的一天</span>
+        					</a>	
+      					</li>
+       					<li role="presentation">
+       						<a href="#day2" aria-controls="day2" role="tab" data-toggle="tab">
+          						<span class="glyphicon glyphicon-edit">
+          						To-Do
+          						<span class="badge">1</span>
+          						</span>
+        					</a>	
+      					</li>
+       					
+       					<li role="presentation">
+       						<a href="#addlist" aria-controls="addlist" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-zoom-in">
+       						&nbsp;搜索</span></a>
+       					</li>
+       					<li role="presentation">
+       						<a href="#homework" aria-controls="homework" role="tab" data-toggle="tab">
+          						<span class="glyphicon glyphicon-th-list">
+          						Web前端高级技术大作业
+          						<span class="badge">3</span>
+          						</span>
+       						</a>     						
+       					</li>
+    				</ul>
+    				</div>
+    				</div>
+    				<div style="float: left;width: 100%;line-height:25px" >
+				  <table class="table table-hover text-center table-striped">
+					<template>
+							<tr  v-for="qingd,index in qingds" :key="index" @click="showlistid(qingd.qid)" >
+							     <td class="glyphicon glyphicon-th-list col-md-1"></td>
+							     
+								<td>{{ qingd.name }}</td>
+								<td>
+									<a  href="#" @click="edit(qingd)" style="color: #E74C29">编辑</a>
+									<a  href="#" @click="deleteList(index)" style="color: #E74C29">删除</a>
+								</td>
+<td></td>
+							</tr>
+
+							<tr>
+						  <td>
+						  	
+						  </td>
+							  <td>
+								  <input type="text" class="form-control" v-model="newlist.name" style="line-height: 40px;"/>
+							  </td>
+							  <td>
+								  <button type="button" class="btn glyphicon glyphicon-plus" v-on:click="savelist"></button>
+							  </td>
+							</tr> 
+						</template>
+						</table>
+					</div>	
+ 				
+		</div>
+ 				<div class="tab-content" id="body-right" style="float: left;width: 70%">
+						<div class="tab-pane fade in active"  role="tabpanel"  id="today" style="width:100%;float: left">
+							<!--<div style="color: #E74C29">
+								<button onclick="changeSpring()" class="btn btn-default">暖</button>
+								<button onclick="changeSummer()" class="btn btn-default">署</button>
+								<button onclick="changeAutumn()" class="btn btn-default">凉</button>
+								<button onclick="changeWinter()" class="btn btn-default">寒</button>
+							</div>-->
+							<div style="float: left;width: 100%">
+							<table class="table table-hover text-center table-striped" id="shows">
+							 <template>
+								<tr  v-for=" task,index in tasks" :key="index" v-if="task.parid===currid">
+									<td><input type="checkbox" id="checkids" name="checkids" v-model="tasks.isSelected"></td>
+									<td><span :class="{del:tasks.isSelected}">{{ task.name }}</span></td>
+									<td>
+										<a  href="#" @click="edits(task)" style="color: #E74C29"><span :class="{del:tasks.isSelected}">编辑</span></a>
+										<a  href="#" @click="deleteTask(index)" style="color: #E74C29"><span :class="{del:tasks.isSelected}">删除</span></a>
+									</td>
+								</tr>
+
+								<tr>
+								  <td>
+									  <input type="text" class="form-control" v-model="newtask.name" style="line-height: 40px;"/>
+									</td>
+								  <td>
+									  <button type="button" class="btn glyphicon glyphicon-plus" v-on:click="savetask"></button>
+								  </td>
+								</tr> 
+							</template>
+						</table>
+					</div>
+							
+						</div>
+						 
+						
+						
+						<div class="tab-pane fade" role="tabpanel" id="day2" style="width:100%;float: left">
+							<div id="d1">
+								<h1>To-Do</h1>
+							</div>
+						</div>
+						<div class="tab-pane fade"  role="tabpanel" id="homework" style="width:100%;float: left">
+								<div class="container-fluid"> 
+										<form action="javascript:postaction()" id="form">
+											<input style="margin-left: 100px;width: 400px;"type="text" id="title" name="title" placeholder="新建任务" required="required" autocomplete="off"/>
+										</form>
+								</div>
+								<div style="margin: 40px 300px 40px 300px;">
+									<h3 onclick="save()">正在进行 <span id="todocount"></span></h3>
+									<ol id="todolist" class="demo-box"></ol>
+									<h3>已经完成 <span id="donecount"></span></h3>
+									<ul id="donelist"></ul>
+								</div>
+						</div>
+						<div class="tab-pane fade"  role="tabpanel" id="addlist" style="width:100%;float: left">
+							<div class="create1">
+      							<div class="tab-content">
+    								<div role="tabpanel" class="tab-pane active" id="completed1">
+    									<div>
+    										<!--<div class="panel panel-default" style="background-image: url(images/500462028.jpg)">
+												<table class="table table-bordered table-hover">
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>截止日期</th>
+															<th>操作</th>
+														</tr>
+													</thead>
+													<template v-for="row,index in rows" :class="{completed:row.isChecked}">
+														<tr>
+															<td><input class="toggle" type="checkbox" v-model="row.isChecked"/>&nbsp;&nbsp;&nbsp;&nbsp;{{row.name}}</td>
+															<td>{{row.deadline}}</td>
+															<td>
+																<a href="#" @click="edit(row)" style="color: #E74C29">编辑</a>&nbsp;&nbsp;<a href="#" @click="deleteList(row)" style="color: #E74C29">删除</a>
+															</td>
+														</tr>
+													</template>
+													<tr>
+														<td>
+															<input type="text" class="form-control" v-model="rowtemplate.name">
+														</td>	
+														<td>
+															<button type="button" class="btn btn-default" @click="save" style="color: #E74C29" onclick="save()">添加清单</button>
+														</td>
+													</tr>
+												</table>
+    										</div>-->
+    										<div class="search">
+													<input type="text" class="searchBox" v-model="searchVal">
+													<button class="btn">搜 索</button>
+											  </div>	
+											  <table>
+											  	<tr>
+											  		<th>名称</th>
+											  		<th>截止日期</th>
+											  	</tr>
+												<tr v-for='(item, key) in list'>
+													<td>{{item.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+													<td>{{item.deadline}}</td>
+												</tr>
+											  </table>
+    									</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+	</div>
+	</div>
+</body>
+
+<script src="js/vue.js"></script>
+<script type="text/javascript" src="js/todo.js"></script>
+	<script>
+
+			var vue=new Vue({
+			el:'#app',
+			data:{rows:[{
+						id:1,
+						name:'操作系统',
+						deadline:'2018-6-15'
+					},{
+						id:2,
+						name:'组成原理',
+						deadline:'2018-7-1'
+					},{
+						id:3,
+						name:'概率统计',
+						deadline:'2018-7-3'
+					},{
+						id:4,
+						name:'java',
+						deadline:'2017-6-12'
+					},{
+						id:5 ,
+						name:'数据库原理',
+						deadline:'2018-7-5'
+					},{
+						id:6 ,
+						name:'毛概',
+						deadline:'2018-7-4'
+					},{
+						id:7 ,
+						name:'C语言设计',
+						deadline:'2018-4-17'
+					}
+					  ],
+					rowtemplate:{id: 0,name: ''},
+				    searchVal:'',
+				   currid:0,
+				  qingds:[{
+					  
+						qid:1,
+						name:'操作系统',
+					  deadline:'2018-7-4'
+						
+					},{
+						qid:2,
+						name:'组成原理',
+						deadline:'2018-7-4'
+						
+					},{
+						qid:3,
+						name:'数据结构',
+						deadline:'2017-6-12'
+						
+					}
+					],newlist:{qid: 0,name: ''},
+				  tasks: [{
+                tid:1,
+				parid:1,
+                tname:'操作1',
+				isSelected:false
+              },{
+                tid:2,
+				parid:1,
+                tname:'操作2',
+				isSelected:false
+              },
+						  {
+                tid:1,
+				parid:2,
+                tname:'组成1',
+				isSelected:false
+              },
+						  {
+                tid:2,
+				parid:2,
+                tname:'操作1',
+				isSelected:false
+              }
+            ],  
+            newtask:{tid: 0,parid:0, tname:''},
+			},
+			methods:{
+				save:function(event){
+					if(this.rowtemplate.id===0){
+						this.rowtemplate.id=this.rows.length+1;
+						this.rows.push(this.rowtemplate);
+					}
+					this.rowtemplate={id: 0,name: ''};
+				},
+				savelist:function(event){
+                    if(this.newlist.qid===0){
+                        this.newlist.qid=this.qingds.length+1;
+                        this.qingds.push(this.newlist);
+                    }
+                    this.newlist={qid:0,name:''};
+                },
+				
+				deleteList:function(id){
+					this.qingds.splice(id,1);
+			},
+				deleteTask:function(id){
+					this.tasks.splice(id,1);
+				},
+				 savetask:function(event){
+                    if(this.newtask.tid===0){
+						this.newtask.parid=this.currid;
+                        this.newtask.tid=this.tasks.length+1;
+                        this.tasks.push(this.newtask);
+                    
+                    }
+                    this.newtask={tid:0,parid:0,tname:''};
+                },
+				showlistid:function(index){
+					this.currid=index;
+				},
+				edit:function(qingd)
+			{
+				this.newlist=qingd;
+			},
+				edits:function(task){
+					this.newtask=task;
+				}
+   	
+		},
+				 computed:{
+                    list: function(){
+                        var _this = this;
+                        var arrByZM = [];
+                        for (var i=0;i<this.qingds.length;i++){
+                            if(this.qingds[i].name.search(this.searchVal) != -1){
+                                arrByZM.push(this.qingds[i]);
+                            }
+                        }
+                        return arrByZM;
+                    }
+                }
+		});
+	</script>
+				
+</html>

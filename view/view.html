@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+	<script src='../js/jquery/2.0.0/jquery.min.js'></script>
+    <link href='../css/bootstrap/3.3.6/bootstrap.min.css' rel="stylesheet">
+    <script src='../js/bootstrap/3.3.6/bootstrap.min.js'></script>
+	<link href="../css/style.css" rel="stylesheet">
+<title>无标题文档</title>
+<style>
+	*{
+		font-family: 微软雅黑;
+		font-size: 20px;
+	}
+	body{
+		padding-top: 60px;
+		position: relative;
+	}
+	table thead tr th{
+		text-align: center;
+		
+	}
+	ul li{list-style-type: none}
+	</style>
+</head>
+
+<body data-spy="scroll" data-target="#navbar"  data-offset="100">
+<div>
+	<div class="header">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="mynav">
+ 	 <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">To-DoList</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+         <li class="active"><a href="#我的 一天">我的一天</a></li>
+         <li><a href="#我的代办">To - Do</a></li>
+         <li><a href="#清单">清单</li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group" style="float: left"> 
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <div style="float:right"> <button type="submit" class="btn btn-default">Submit</button></div>
+        
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Admin_one<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="login.html">登录</a></li>
+								<li><a href="#">切换账号</a></li>
+								<li><a href="#">注销</a></li>
+							</ul>
+						</li>
+				</ul>
+    </div>
+  </div>
+</nav>
+	<div class="panel panel-primary" >
+		<div class="panel-heading">
+			<div class="panel-title">
+				<h2  id="我的 一天">我的 一天</h2>
+			</div>
+		</div>
+		<div class="panel-body">
+			<!--<div id="app">
+					<div class="search">
+									<input type="text" v-model="searchVal">
+									<button class="btn btn-primary">搜索</button>
+								</div>
+								<table class="table">
+									<tr>
+										<th>代办事项名</th>
+									</tr>
+									<tr v-for="row in list">
+										<td>{{row.name}}</td>
+									</tr>
+								</table>
+								
+				</div>-->
+			<img src="images/7p.jpg" height="700px" width="100%">
+		</div>
+	</div>
+	<div class="panel panel-primary" >
+		<div class="panel-heading">
+			<div class="panel-title">
+				<h2  id="我的代办">我的代办</h2>
+			</div>
+		</div>
+		<div class="panel-body">
+				<div class="panel panel-primary" style="padding: 30px">
+						<div id="app">
+							<tr>
+								<th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代办事项名称</th>
+							</tr>
+							<template v-for="row,index in rows">
+								<tr>
+									<td><input class="toggle" type="checkbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
+										{{row.name}}
+									</td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" @click="edit(row)">编辑</a>&nbsp;&nbsp;<a href="#" @click="delete(index)">删除</a></td>
+								</tr>
+							</template>
+							<tr>
+								<td>
+									<input type="text" class="form-control" v-model="rowtemplate.name">
+								</td>
+							</tr>
+							<td>
+									<button type="button" class="btn btn-primary" @click="Add">添加代办事项</button>
+								</td>
+						</div>
+</div>
+		</div>
+	</div>
+		<div class="panel panel-primary" >
+		<div class="panel-heading">
+			<div class="panel-title">
+				<h2  id="清单">我的清单</h2>
+			</div>
+		</div>
+		<div class="panel-body">
+		</div>
+	</div>
+	</div>
+</div>
+</body>
+<script src="../js/vue.js"></script>
+ <script>
+	var data={
+		rows:[{
+			id:1,
+			name:'完成web大作业的需求分析'
+		},{
+			  id:2,
+			  name:'完成web大作业的系统分析'
+			  },{
+				  id:3,
+				  name:'完成web大作业的需求设计'
+			  }],
+		rowtemplate:{id:0,name:''}
+	};
+	 var vue = new Vue({
+		 el:'#app',
+		 data:data,
+		 methods:{
+			 Add:function(event){
+				 if(this.rowtemplate.id ===0){
+					 this.rowtemplate.id = this.length+1;
+					 this.rows.push(this.rowtemplate);
+				 }
+				 this.rowtemplate={id:0,name:""};
+			 },
+			 edit:function(row){
+				 this.rowtemplate = row;
+			 },
+			  delete:function(id){
+				  this.rows.splice(id,1);	
+			  }
+		 },	
+		computed:{
+			list:function(){
+		 		var _this=this;
+		 		var arrBy =[];
+		 for(var i=0;i<this.rows[i].length;i++){
+			if(this.rows[i].name.search(this.searchVal)!= -1){
+				arrBy.push(this.list[i])		 
+		 }
+		 }
+	 return arrBy;
+	 }
+	 }
+		 
+	 });
+	</script>
+</html> 

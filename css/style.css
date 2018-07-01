@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mycenter{
+	margin-top:100px;
+	margin-left:auto;
+	margin-right: auto;
+	height:350px;
+	width:500px;
+	padding: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+.mycenter mysign{
+	width:440px;
+}
+.mycenter input,checkbox,button{
+	margin-top:2%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.mycheckbox{
+	margin-top:10px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+	height: 10px;
+}
+.btn2{
+	margin-left: 28px;
+}
+#title{
+	background-color:#DF3D40;
+	opacity: 0.7;
+	margin-bottom: 10px;
+}
+#lis{
+	margin-top: 10px;
+}
+#content{
+	width:100%;
+}
+#tip{
+	margin-left:30px;
+}
+#btn3{
+	margin-left:100px;
+}
+h3 {
+	position:relative;
+}
+span {
+	position:absolute;
+	top:2px;
+	right:5px;
+	display:inline-block;
+	padding:0 5px;
+	height:20px;
+	border-radius:20px;
+	background:#E6E6FA;
+	line-height:22px;
+	text-align:center;
+	color:#666;
+	font-size:14px;
+	margin-left: 500px;
+}
+li input {
+	position:absolute;
+	top:2px;
+	left:10px;
+	width:22px;
+	height:22px;
+	cursor:pointer;
+}
+li p input {top:3px;
+	left:40px;
+	width:70%;
+	height:20px;
+	line-height:14px;
+	text-indent:5px;
+	font-size:14px;
+}
